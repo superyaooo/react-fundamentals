@@ -1,2 +1,2 @@
-Pluralsight course: React Fundamentals
+### Pluralsight course: React Fundamentals
 React + JavaScript + Vite
