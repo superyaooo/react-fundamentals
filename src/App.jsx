@@ -1,5 +1,6 @@
 import Banner from "./components/Banner"
 import './App.css'
+import HouseList from "./components/MushroomList"
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Banner>
         <div>ISO a mushroom rental.</div>
       </Banner>
+      <HouseList/>
     </>
   )
 }

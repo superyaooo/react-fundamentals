@@ -7,7 +7,7 @@ const Banner = ({children}) => {
       <div className='col-5'>
         <img src={logo} alt="logo" className={logoClass}/>
       </div>
-      <div className='col-7 mt-5'>
+      <div className='col-7 mt-5 themeFontColor'>
         {children}
       </div>
     </header>
