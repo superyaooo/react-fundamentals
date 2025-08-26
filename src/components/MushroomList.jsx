@@ -18,6 +18,19 @@ const mushroomsArray = [
 
 const HouseList = () => {
   const [mushrooms, setMushrooms] = useState(mushroomsArray);
+
+  const addMushroom = () => {
+    setMushrooms([
+      ...mushrooms, 
+      {
+        id: 6,
+        address: "4086 boohoo ln",
+        country: "usa",
+        price: 601
+      },
+    ]);
+  };
+
   return (
     <>
       <div className="row mb-2">
@@ -36,9 +49,12 @@ const HouseList = () => {
         <tbody>
           {/* spread {...m} to pass in all properties of m */}
           {/* {mushrooms.map(m => <MushroomRow key={m.id} {...m} />)} */}
-          {mushroomsArray.map(m => <MushroomRow key={m.id} mushroom={m}/>)}
+          {mushrooms.map(m => <MushroomRow key={m.id} mushroom={m}/>)}
         </tbody>
       </table>
+      <button className="btn btn-primary" onClick={addMushroom}>
+        Add
+      </button>
     </>
   );
 };
