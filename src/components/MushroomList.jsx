@@ -1,6 +1,7 @@
+import { useState } from "react";
 import MushroomRow from "./MushroomRow";
 
-const mushrooms = [
+const mushroomsArray = [
   {
     id:1,
     address: "124 street",
@@ -16,6 +17,7 @@ const mushrooms = [
 ];
 
 const HouseList = () => {
+  const [mushrooms, setMushrooms] = useState(mushroomsArray);
   return (
     <>
       <div className="row mb-2">
@@ -32,7 +34,9 @@ const HouseList = () => {
           </tr>
         </thead>
         <tbody>
-          {mushrooms.map(m => <MushroomRow key={m.id} mushroom={m}/>)}
+          {/* spread {...m} to pass in all properties of m */}
+          {/* {mushrooms.map(m => <MushroomRow key={m.id} {...m} />)} */}
+          {mushroomsArray.map(m => <MushroomRow key={m.id} mushroom={m}/>)}
         </tbody>
       </table>
     </>
