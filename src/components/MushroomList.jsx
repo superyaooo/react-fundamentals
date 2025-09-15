@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { MushroomRowMem } from "./MushroomRow";
 
 const MushroomList = () => {
   const [mushrooms, setMushrooms] = useState([]);
+  const counter = useRef(0); // returns current value
 
   useEffect(() => {
     const fetchMushrooms = async() => {
-      const response = await fetch("https://localhost:4000/house");
+      const response = await fetch("http://localhost:4000/houses");
       const mushrooms = await response.json();
       setMushrooms(mushrooms);
     };
 
     fetchMushrooms();
+    counter.current++; // does not cause re-render when value changes
   }, []);  // execute effect once when component is rendered by using []
 
   const addMushroom = () => {
