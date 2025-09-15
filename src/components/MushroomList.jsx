@@ -1,23 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MushroomRowMem } from "./MushroomRow";
 
-const mushroomsArray = [
-  {
-    id:1,
-    address: "124 street",
-    country: "usa",
-    price: 900
-  },
-  {
-    id:2,
-    address: "2449 ln",
-    country: "usa",
-    price: 800
-  }
-];
-
 const MushroomList = () => {
-  const [mushrooms, setMushrooms] = useState(mushroomsArray);
+  const [mushrooms, setMushrooms] = useState([]);
+
+  useEffect(() => {
+    const fetchMushrooms = async() => {
+      const response = await fetch("https://localhost:4000/house");
+      const mushrooms = await response.json();
+      setMushrooms(mushrooms);
+    };
+
+    fetchMushrooms();
+  }, []);  // execute effect once when component is rendered by using []
 
   const addMushroom = () => {
     setMushrooms([
