@@ -1,5 +1,5 @@
 import { useState } from "react";
-import MushroomRow from "./MushroomRow";
+import { MushroomRowMem } from "./MushroomRow";
 
 const mushroomsArray = [
   {
@@ -16,7 +16,7 @@ const mushroomsArray = [
   }
 ];
 
-const HouseList = () => {
+const MushroomList = () => {
   const [mushrooms, setMushrooms] = useState(mushroomsArray);
 
   const addMushroom = () => {
@@ -49,7 +49,7 @@ const HouseList = () => {
         <tbody>
           {/* spread {...m} to pass in all properties of m */}
           {/* {mushrooms.map(m => <MushroomRow key={m.id} {...m} />)} */}
-          {mushrooms.map(m => <MushroomRow key={m.id} mushroom={m}/>)}
+          {mushrooms.map(m => <MushroomRowMem key={m.id} mushroom={m}/>)}
         </tbody>
       </table>
       <button className="btn btn-primary" onClick={addMushroom}>
@@ -59,4 +59,4 @@ const HouseList = () => {
   );
 };
 
-export default HouseList;
+export default MushroomList;
