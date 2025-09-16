@@ -3,6 +3,7 @@ import './App.css'
 import MushroomList from "./components/MushroomList"
 import { Suspense, useState } from "react"
 import Mushroom from "./components/Mushroom";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 function App() {
   const [selectedMushroom, setSelectedMushroom] = useState();
@@ -12,7 +13,7 @@ function App() {
   };
 
   return (
-    <>
+    <ErrorBoundary fallback="Somethign went wrong...">
       {/* <Banner headerText="looking for a mushroom to rent" /> */}
       <Banner>
         <div>ISO a mushroom rental.</div>
@@ -22,8 +23,8 @@ function App() {
       </Suspense> */}
       {selectedMushroom ? <Mushroom mushroom={selectedMushroom}/> 
         : <MushroomList selectMushroom={setSelectedMushroomWrapper}/>}
-    </>
+    </ErrorBoundary>
   )
 }
 
-export default App
+export default App;

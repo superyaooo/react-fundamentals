@@ -2,6 +2,7 @@ import loadingStatus from "../helpers/loadingStatus";
 import useMushrooms from "../hooks/useMushrooms";
 import MushroomRow from "./MushroomRow";
 import LoadingIndicator from "./LoadingIndicator";
+import ErrorBoundary from "./ErrorBoundary";
 
 const MushroomList = ({selectMushroom}) => {
   const {mushrooms, setMushrooms, loadingState} = useMushrooms();
@@ -40,8 +41,10 @@ const MushroomList = ({selectMushroom}) => {
         <tbody>
           {/* spread {...m} to pass in all properties of m */}
           {/* {mushrooms.map(m => <MushroomRow key={m.id} {...m} />)} */}
-          {mushrooms.map(m => <MushroomRow key={m.id} 
-            selectMushroom={selectMushroom} mushroom={m}/>)}
+          <ErrorBoundary fallback="error loading mushroom rows!">
+            {mushrooms.map(m => <MushroomRow key={m.id} 
+              selectMushroom={selectMushroom} mushroom={m}/>)}
+          </ErrorBoundary>
         </tbody>
       </table>
       <button className="btn btn-primary" onClick={addMushroom}>
