@@ -1,21 +1,15 @@
-import { useEffect, useState, useRef } from "react";
-import { MushroomRowMem } from "./MushroomRow";
+import loadingStatus from "../helpers/loadingStatus";
+import useMushrooms from "../hooks/useMushrooms";
+import MushroomRow from "./MushroomRow";
+import LoadingIndicator from "./LoadingIndicator";
 
-const MushroomList = () => {
-  const [mushrooms, setMushrooms] = useState([]);
-  const counter = useRef(0); // returns current value
-
-  useEffect(() => {
-    const fetchMushrooms = async() => {
-      const response = await fetch("http://localhost:4000/houses");
-      const mushrooms = await response.json();
-      setMushrooms(mushrooms);
-    };
-
-    fetchMushrooms();
-    counter.current++; // does not cause re-render when value changes
-  }, []);  // execute effect once when component is rendered by using []
-
+const MushroomList = ({selectMushroom}) => {
+  const {mushrooms, setMushrooms, loadingState} = useMushrooms();
+  
+  if(loadingState !== loadingStatus.loaded) {
+    return <LoadingIndicator loadingState={loadingState}/>
+  }
+  
   const addMushroom = () => {
     setMushrooms([
       ...mushrooms, 
@@ -46,7 +40,8 @@ const MushroomList = () => {
         <tbody>
           {/* spread {...m} to pass in all properties of m */}
           {/* {mushrooms.map(m => <MushroomRow key={m.id} {...m} />)} */}
-          {mushrooms.map(m => <MushroomRowMem key={m.id} mushroom={m}/>)}
+          {mushrooms.map(m => <MushroomRow key={m.id} 
+            selectMushroom={selectMushroom} mushroom={m}/>)}
         </tbody>
       </table>
       <button className="btn btn-primary" onClick={addMushroom}>
